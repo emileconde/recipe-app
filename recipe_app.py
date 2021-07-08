@@ -14,7 +14,7 @@ RECIPE_IMAGE_HEIGHT = 300
 
 class RecipeApp(object):
 
-    def __init__(self, recipe_app_id, recipe_app_key):
+    def __init__(self, recipe_app_id, recipe_app_key, **kwargs):
 
         
         self.recipe_app_id = recipe_app_id
@@ -39,13 +39,15 @@ class RecipeApp(object):
        
     def __run_search_query(self):
 
-        playsound(BUTTON_CLICK_SOUND)
+        #playsound(BUTTON_CLICK_SOUND)
         query = self.search_entry.get()
         recipe = self.__get_recipe(query)
 
         if recipe:
             recipe_image = recipe.image
             recipe_url = recipe.url
+            print("From run_search_query\n"+recipe)
+            print("From run_search_query\n" + recipe.ingredient_names)
         
         else:
             # Recipe not found
@@ -56,7 +58,7 @@ class RecipeApp(object):
         self.__get_ingredients(recipe)
 
         def __open_link():
-            playsound(BUTTON_CLICK_SOUND)
+            # playsound(BUTTON_CLICK_SOUND)
             webbrowser.open(recipe_url)
 
         self.recipe_button = tk.Button(self.window, text = "recipe link", highlightbackground = "#ea86b6",
@@ -67,9 +69,10 @@ class RecipeApp(object):
     def __get_recipe(self, query):
         edamam_object = PyEdamam(recipes_appid=self.recipe_app_id, recipes_appkey=self.recipe_app_key)
         query_result = edamam_object.search_recipe(query)
-        
+
         # Get first recipe in list
         for recipe in query_result:
+            print(recipe)
             return recipe
     
     def __show_image(self, image_url):

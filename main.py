@@ -1,12 +1,9 @@
-import requests
-from apikey import get_api_key
+import pandas as pd
+from utils import get_json
+from utils import parse_json
 
-query = 'ingredients=apples,+flour,+sugar'
-api_key = '&apiKey='+get_api_key()
-number_of_result = '&number=2'
-ending = 'findByIngredients?'
-# base_url = f'https://api.spoonacular.com/recipes/findByIngredients?ingredients=apples,+flour,+sugar&number=2&apiKey={api_key}'
-base_url = 'https://api.spoonacular.com/recipes/'+ending+query+number_of_result+api_key
-response = requests.get(base_url)
+response = get_json()
 
-print(response.json())
+dic = parse_json(response)
+
+print(dic)
