@@ -1,9 +1,6 @@
-import pandas as pd
-from utils import get_json
-from utils import parse_json
+from ui import RecipeApp
 
-response = get_json()
+APP_KEY = "8c10b92910a94c04954844719ea65bb2"
+recipe_app = RecipeApp(APP_KEY)
+recipe_app.run_app()
 
-dic = parse_json(response)
-
-print(dic)
